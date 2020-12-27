@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/cars/sedanSports.glb" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends \"res://cars/car_base.gd\"
+
+signal change_camera
+
+var tail_lights = preload(\"res://assets/cars/lightBack.material\")
+onready var current_camera = 0
+
+func _ready():
+	DebugOverlay.stats.add_property(self, \"velocity\", \"length\")
+	DebugOverlay.stats.add_property(self, \"drifting\", \"\")
+	DebugOverlay.draw.add_vector(self, \"velocity\", 1, 4, Color(0, 1, 0, 0.5))
+	update_camera()
+
+func get_input():
+	var turn = Input.get_action_strength(\"steer_left\")
+	turn -= Input.get_action_strength(\"steer_right\")
+	steer_angle = turn * deg2rad(steering_limit)
+	$tmpParent/sedanSports/wheel_frontRight.rotation.y = steer_angle*2
+	$tmpParent/sedanSports/wheel_frontLeft.rotation.y = steer_angle*2
+	acceleration = Vector3.ZERO
+	if Input.is_action_pressed(\"accelerate\"):
+		acceleration = -transform.basis.z * engine_power
+	if Input.is_action_pressed(\"brake\"):
+		tail_lights.emission_enabled = true
+		acceleration = -transform.basis.z * braking
+	else:
+		tail_lights.emission_enabled = false
+
+func _input(event):
+	if event.is_action_pressed(\"toggle_camera\"):
+		update_camera()
+
+func update_camera():
+		current_camera = (current_camera + 1) % $CameraPositions.get_child_count()
+		emit_signal(\"change_camera\", $CameraPositions.get_child(current_camera))
+"
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.561875, 0.43367, 1.18015 )
+
+[sub_resource type="CylinderShape" id=2]
+radius = 0.300442
+height = 1.29125
+
+[node name="sedanSports" instance=ExtResource( 1 )]
+script = SubResource( 3 )
+wheel_base = 1.0
+
+[node name="CollisionBody" type="CollisionShape" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671281, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionWheelFront" type="CollisionShape" parent="." index="2"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0.29766, -0.658612 )
+shape = SubResource( 2 )
+
+[node name="CollisionWheelRear" type="CollisionShape" parent="." index="3"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0.29766, 0.658665 )
+shape = SubResource( 2 )
+
+[node name="CameraPositions" type="Spatial" parent="." index="4"]
+
+[node name="1" type="Position3D" parent="CameraPositions" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.767187, 0.641423, 0, -0.641423, 0.767187, 0, 8.56047, 7.17816 )
+
+[node name="2" type="Position3D" parent="CameraPositions" index="1"]
+transform = Transform( 1, 0, 0, 0, 0.816279, 0.577658, 0, -0.577658, 0.816279, 0, 3.58094, 4.36203 )
+
+[node name="3" type="Position3D" parent="CameraPositions" index="2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.677, -5.2941 )

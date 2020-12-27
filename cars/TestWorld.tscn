@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://cars/DemoCar.tscn" type="PackedScene" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.301961, 0.298039, 0.298039, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+size = Vector2( 50, 50 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -25.1366, 0.136612, -25.1366, -25.1366, 0.136612, 25.1366, 25.1366, 0.136612, -25.1366, 25.1366, 0.136612, 25.1366 )
+
+[node name="TestWorld" type="Spatial"]
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 3 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.694269, 0.719715, 0, -0.719715, 0.694269, 3.27118, 10.2141, 13.7042 )
+current = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.468238, 0.883602, 0, -0.883602, 0.468238, 0, 31.0751, 0 )
+shadow_enabled = true
+
+[node name="DemoCar" parent="." instance=ExtResource( 1 )]
