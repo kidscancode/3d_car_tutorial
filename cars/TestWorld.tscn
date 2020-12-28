@@ -32,3 +32,4 @@ transform = Transform( 1, 0, 0, 0, 0.468238, 0.883602, 0, -0.883602, 0.468238, 0
 shadow_enabled = true
 
 [node name="DemoCar" parent="." instance=ExtResource( 1 )]
+engine_power = 7.0

@@ -19,10 +19,6 @@ config/name="3d_car_tutorial"
 run/main_scene="res://cars/TestWorld.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-DebugOverlay="*res://debug/DebugOverlay.tscn"
-
 [input]
 
 steer_left={
