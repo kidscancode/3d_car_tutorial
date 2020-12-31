@@ -16,8 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="3d_car_tutorial"
-run/main_scene="res://cars/TestWorld.tscn"
+config/description="by KidsCanCode"
+run/main_scene="res://src/World.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+settings/stdout/verbose_stdout=true
 
 [input]
 
