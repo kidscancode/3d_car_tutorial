@@ -24,3 +24,17 @@ shape = SubResource( 2 )
 [node name="CollisionWheelsRear" type="CollisionShape" parent="." index="3"]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0.299966, 0.662488 )
 shape = SubResource( 2 )
+
+[node name="CameraPositions" type="Spatial" parent="." index="4"]
+
+[node name="Position3D" type="Position3D" parent="CameraPositions" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.894021, 0.448024, 0, -0.448024, 0.894021, 0, 6.09343, 6.15514 )
+
+[node name="Position3D2" type="Position3D" parent="CameraPositions" index="1"]
+transform = Transform( 1, 0, 0, 0, 0.774779, 0.632232, 0, -0.632232, 0.774779, 0, 15.2118, 13.0024 )
+
+[node name="Position3D3" type="Position3D" parent="CameraPositions" index="2"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 17.5587, -7.54389 )
+
+[node name="Position3D4" type="Position3D" parent="CameraPositions" index="3"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -6.29105, 0.430022, 0 )

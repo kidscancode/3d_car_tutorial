@@ -19,6 +19,7 @@ var velocity = Vector3.ZERO
 var steer_angle = 0.0  # Current wheel angle.
 var drifting = false
 
+
 func _physics_process(delta):
 	# If the car's in the air, you can't steer or accelerate.
 	if is_on_floor():
@@ -29,6 +30,7 @@ func _physics_process(delta):
 	velocity += acceleration * delta
 	velocity = move_and_slide_with_snap(velocity,
 				-transform.basis.y, Vector3.UP, true)
+
 
 func apply_friction(delta):
 	# Stop coasting if velocity is very low.
@@ -66,7 +68,7 @@ func calculate_steering(delta):
 	
 	# Point in the steering direction.
 	# Note: not necessarily the velocity direction.
-	look_at(transform.origin + new_heading, transform.basis.y)
+	look_at(transform.origin + new_heading, Vector3.UP)
 
 func get_input():
 	# Override this in inherited scripts for controls

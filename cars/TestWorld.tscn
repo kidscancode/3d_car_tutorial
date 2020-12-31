@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://cars/DemoCar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ChaseCamera.tscn" type="PackedScene" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.301961, 0.298039, 0.298039, 1 )
@@ -25,11 +26,15 @@ shape = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.694269, 0.719715, 0, -0.719715, 0.694269, 3.27118, 10.2141, 13.7042 )
-current = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.468238, 0.883602, 0, -0.883602, 0.468238, 0, 31.0751, 0 )
 shadow_enabled = true
 
 [node name="DemoCar" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.0984, 0 )
 engine_power = 7.0
+
+[node name="ChaseCamera" parent="." instance=ExtResource( 2 )]
+current = true
+[connection signal="change_camera" from="DemoCar" to="ChaseCamera" method="_on_change_camera"]
