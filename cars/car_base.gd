@@ -19,6 +19,8 @@ var velocity = Vector3.ZERO
 var steer_angle = 0.0  # Current wheel angle.
 var drifting = false
 
+onready var front_ray = $FrontRay
+onready var rear_ray = $RearRay
 
 func _physics_process(delta):
 	# If the car's in the air, you can't steer or accelerate.
@@ -30,6 +32,22 @@ func _physics_process(delta):
 	velocity += acceleration * delta
 	velocity = move_and_slide_with_snap(velocity,
 				-transform.basis.y, Vector3.UP, true)
+	# Align with slopes
+	# If either wheel is in the air, align to slope
+	if front_ray.is_colliding() or rear_ray.is_colliding():
+		# If one wheel is in air, move it down
+		var nf = front_ray.get_collision_normal() if front_ray.is_colliding() else Vector3.UP
+		var nr = rear_ray.get_collision_normal() if rear_ray.is_colliding() else Vector3.UP
+		var n = ((nr + nf) / 2.0).normalized()
+		var xform = align_with_y(global_transform, n)
+		global_transform = global_transform.interpolate_with(xform, 0.1)
+
+
+func align_with_y(xform, new_y):
+	xform.basis.y = new_y
+	xform.basis.x = -xform.basis.z.cross(new_y)
+	xform.basis = xform.basis.orthonormalized()
+	return xform
 
 
 func apply_friction(delta):
