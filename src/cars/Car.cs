@@ -1,6 +1,6 @@
 using Godot;
 
-abstract public class Car : KinematicBody
+public class Car : KinematicBody
 {
     #region Car behaviour parameters, adjust as needed.
     [Export]
@@ -118,5 +118,7 @@ abstract public class Car : KinematicBody
     }
 
     // NOTE: This is a abstract method, and should be implemented in the real object
-    abstract public void GetInput();
+    public virtual void GetInput()
+    {
+    }
 }
