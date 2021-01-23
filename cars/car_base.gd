@@ -72,7 +72,7 @@ func calculate_steering(delta):
 	# traction
 	if not drifting and velocity.length() > slip_speed:
 		drifting = true
-	if drifting and velocity.length() < slip_speed and steer_angle == 0:
+	if drifting and velocity.length() < slip_speed and abs(steer_angle) < 0.1:
 		drifting = false
 	var traction = traction_fast if drifting else traction_slow
 

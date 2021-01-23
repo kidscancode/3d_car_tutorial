@@ -16,8 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="3d_car_tutorial"
-run/main_scene="res://cars/TestWorld.tscn"
+run/main_scene="res://TestWorld2.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+DebugOverlay="*res://debug/DebugOverlay.tscn"
 
 [input]
 

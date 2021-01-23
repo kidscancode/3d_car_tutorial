@@ -35,7 +35,7 @@ transform = Transform( 1, 0, 0, 0, 0.468238, 0.883602, 0, -0.883602, 0.468238, 0
 shadow_enabled = true
 
 [node name="DemoCar" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.109025, 16.7193 )
+transform = Transform( -0.0130024, 0, 0.999915, 0, 1, 0, -0.999915, 0, -0.0130024, 0, 0.109025, 39.7193 )
 engine_power = 7.0
 
 [node name="ChaseCamera" parent="." instance=ExtResource( 2 )]
